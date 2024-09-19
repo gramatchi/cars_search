@@ -37,6 +37,12 @@
     stroke: white;
 }
 
+.heartActive {
+    fill: #3470ff;
+stroke-width: 1px;
+stroke: #3470ff;
+  }
+
 .carInfo {
     display: flex;
     flex-direction: column;

@@ -1,15 +1,21 @@
+import React, { useState, useEffect } from "react";
 import styles from "./CarItem.module.css";
 import heart from "../../images/heart.svg";
 
 const CarItem = ({ car }) => {
-  const extractWords = (address) => {
-    const parts = address.split(',');
-    const city = parts[1].split(' ').pop().trim(); 
-    const country = parts[2].trim(); 
-    return `${city} | ${country}`; 
-  };
+  const storageKey = `favorite-${car.id}`;
+  const [isFavorite, setIsFavorite] = useState(() => {
+    const saved = localStorage.getItem(storageKey);
+    return saved === 'true';
+  });
 
-  const extractedWords = extractWords(car.address);
+  useEffect(() => {
+    localStorage.setItem(storageKey, isFavorite);
+  }, [isFavorite]);
+
+  const handleHeartClick = () => {
+    setIsFavorite(prevState => !prevState);
+  };
 
   return (
     <div className={styles.carContainer}>
@@ -20,7 +26,12 @@ const CarItem = ({ car }) => {
             alt={`${car.description}`}
             className={styles.carImage}
           />
-          <svg className={styles.heart} width="18" height="18">
+          <svg 
+            className={`${styles.heart} ${isFavorite ? styles.heartActive : ''}`}
+            width="18" 
+            height="18"
+            onClick={handleHeartClick}
+          >
             <use href={`${heart}#heart`} />
           </svg>
         </div>
@@ -30,7 +41,7 @@ const CarItem = ({ car }) => {
             <p className={styles.price}>{car.rentalPrice}</p>
           </div>
           <div className={styles.carInfoSecond}>
-            <p>{extractedWords} | {car.rentalCompany}</p>
+            <p>{car.address} | {car.rentalCompany}</p>
             <p>{car.type} | {car.model} | {car.mileage} | {car.functionalities[0]}</p>
           </div>
           <button className={styles.learnMoreBtn}>Learn more</button>
