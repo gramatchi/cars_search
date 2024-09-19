@@ -3,7 +3,7 @@ import "./App.css";
 import Catalog from "./pages/CatalogPage/Catalog";
 import Favorites from "./pages/FavoritesPage/Favorites";
 import Home from "./pages/HomePage/Home";
-import NavBar from "./components/NavBar";
+import NavBar from "./components/NavBar/NavBar";
 
 function App() {
   return (
