@@ -1,7 +1,16 @@
-const Home = () => {
-  return (
-    <div>Home</div>
-  )
-}
+import styles from "./Home.module.css";
+import backgroundImage from "../../images/carsaleBanner.jpg";
 
-export default Home
+const Home = () => {
+  const homeStyle = {
+    backgroundImage: `url(${backgroundImage})`,
+  };
+
+  return (
+    <div className={styles.home} style={homeStyle}>
+      <div className={styles.textcontainer}>Welcome to Home Page</div>
+    </div>
+  );
+};
+
+export default Home;
