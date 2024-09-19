@@ -1,0 +1,35 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8f9fa;
+  }
+  
+  .navleft {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navright {
+    display: flex;
+  }
+  
+  .navlink {
+    margin-right: 20px;
+    text-decoration: none;
+    color: #007bff;
+    font-size: 18px;
+  }
+  
+  .navlink.active {
+    font-weight: bold;
+    color: #0056b3;
+  }
+  
+  .logo {
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+  }
+  

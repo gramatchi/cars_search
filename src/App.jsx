@@ -1,17 +1,19 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Catalog from "./pages/CatalogPage/Catalog";
-import Favotities from "./pages/FavoritesPage/Favotities";
+import Favorites from "./pages/FavoritesPage/Favorites";
 import Home from "./pages/HomePage/Home";
+import NavBar from "./components/NavBar";
 
 function App() {
   return (
     <>
+      <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/favorites" element={<Favotities />} />
+        <Route path="/favorites" element={<Favorites />} />
         <Route path="/Catalog" element={<Catalog />} />
-        <Route path="*" element={<Home />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>
   );
