@@ -12,9 +12,9 @@ const SearchBar = ({
   onSelectMileageRange,
 }) => {
   const [carMakes, setCarMakes] = useState([]);
-  
-  const [selectedMake, setSelectedMake] = useState(null);  
-  const [selectedPrice, setSelectedPrice] = useState(null); 
+
+  const [selectedMake, setSelectedMake] = useState(null);
+  const [selectedPrice, setSelectedPrice] = useState(null);
   const [mileageFrom, setMileageFrom] = useState("");
   const [mileageTo, setMileageTo] = useState("");
 
@@ -59,8 +59,8 @@ const SearchBar = ({
   };
 
   const handleReset = () => {
-    setSelectedMake(null); 
-    setSelectedPrice(null); 
+    setSelectedMake(null);
+    setSelectedPrice(null);
     setMileageFrom("");
     setMileageTo("");
     onSelectCarMake("");
@@ -88,7 +88,10 @@ const SearchBar = ({
           </label>
           <Select
             id="car-make-select"
-            value={carMakeOptions.find((option) => option.value === selectedMake) || null}
+            value={
+              carMakeOptions.find((option) => option.value === selectedMake) ||
+              null
+            }
             onChange={handleSelectMakeChange}
             options={carMakeOptions}
             placeholder="Enter the text"
@@ -96,45 +99,45 @@ const SearchBar = ({
             styles={{
               control: (provided) => ({
                 ...provided,
-                borderRadius: '14px',
-                width: '224px',
-                height: '48px',
-                border: '1px solid #ccc',
-                boxShadow: 'none',
-                alignItems: 'center',
-                display: 'flex',
-                font: '500 18px / 1.11111 "Manrope", sans-serif', 
-                color: '#121417', 
-                background: '#f7f7fb',
+                borderRadius: "14px",
+                width: "224px",
+                height: "48px",
+                border: "1px solid #ccc",
+                boxShadow: "none",
+                alignItems: "center",
+                display: "flex",
+                font: '500 18px / 1.11111 "Manrope", sans-serif',
+                color: "#121417",
+                background: "#f7f7fb",
               }),
               singleValue: (provided) => ({
                 ...provided,
-                color: '#121417', 
-                width: '100%', 
+                color: "#121417",
+                width: "100%",
               }),
               placeholder: (provided) => ({
                 ...provided,
-                color: '#121417', 
-                display: 'flex',
-                background: '#f7f7fb',
+                color: "#121417",
+                display: "flex",
+                background: "#f7f7fb",
               }),
 
               indicatorSeparator: () => ({
-                display: 'none', 
+                display: "none",
               }),
               menu: (provided) => ({
                 ...provided,
-                borderRadius: '14px',
-                border:'1px solid rgba(18, 20, 23, 0.05)',
-                background: '#fff', 
-                boxShadow: '0 4px 36px 0 rgba(0, 0, 0, 0.02)', 
-                color: 'rgba(18, 20, 23, 0.2)',
+                borderRadius: "14px",
+                border: "1px solid rgba(18, 20, 23, 0.05)",
+                background: "#fff",
+                boxShadow: "0 4px 36px 0 rgba(0, 0, 0, 0.02)",
+                color: "rgba(18, 20, 23, 0.2)",
               }),
               option: (provided, state) => ({
                 ...provided,
-                backgroundColor: state.isFocused ? '#e0e0e0' : '#fff', 
-                borderRadius: '14px',
-                color: state.isFocused ? 'black' : 'rgba(18, 20, 23, 0.2)'
+                backgroundColor: state.isFocused ? "#e0e0e0" : "#fff",
+                borderRadius: "14px",
+                color: state.isFocused ? "black" : "rgba(18, 20, 23, 0.2)",
               }),
             }}
             isSearchable={false}
@@ -147,7 +150,10 @@ const SearchBar = ({
           </label>
           <Select
             id="price-select"
-            value={priceOptions.find((option) => option.value === selectedPrice) || null}
+            value={
+              priceOptions.find((option) => option.value === selectedPrice) ||
+              null
+            }
             onChange={handleSelectPriceChange}
             options={priceOptions}
             placeholder="To $"
@@ -155,45 +161,45 @@ const SearchBar = ({
             styles={{
               control: (provided) => ({
                 ...provided,
-                borderRadius: '14px',
-                width: '125px',
-                height: '48px',
-                border: '1px solid #ccc',
-                boxShadow: 'none',
-                alignItems: 'center',
-                display: 'flex',
-                font: '500 18px / 1.11111 "Manrope", sans-serif', 
-                color: '#121417', 
-                background: '#f7f7fb',
+                borderRadius: "14px",
+                width: "125px",
+                height: "48px",
+                border: "1px solid #ccc",
+                boxShadow: "none",
+                alignItems: "center",
+                display: "flex",
+                font: '500 18px / 1.11111 "Manrope", sans-serif',
+                color: "#121417",
+                background: "#f7f7fb",
               }),
               singleValue: (provided) => ({
                 ...provided,
-                color: '#121417', 
-                width: '100%', 
+                color: "#121417",
+                width: "100%",
               }),
               placeholder: (provided) => ({
                 ...provided,
-                color: '#121417', 
-                display: 'flex',
-                background: '#f7f7fb',
+                color: "#121417",
+                display: "flex",
+                background: "#f7f7fb",
               }),
 
               indicatorSeparator: () => ({
-                display: 'none', 
+                display: "none",
               }),
               menu: (provided) => ({
                 ...provided,
-                borderRadius: '14px',
-                border:'1px solid rgba(18, 20, 23, 0.05)',
-                background: '#fff', 
-                boxShadow: '0 4px 36px 0 rgba(0, 0, 0, 0.02)', 
-                color: 'rgba(18, 20, 23, 0.2)',
+                borderRadius: "14px",
+                border: "1px solid rgba(18, 20, 23, 0.05)",
+                background: "#fff",
+                boxShadow: "0 4px 36px 0 rgba(0, 0, 0, 0.02)",
+                color: "rgba(18, 20, 23, 0.2)",
               }),
               option: (provided, state) => ({
                 ...provided,
-                backgroundColor: state.isFocused ? '#e0e0e0' : '#fff', 
-                borderRadius: '14px',
-                color: state.isFocused ? 'black' : 'rgba(18, 20, 23, 0.2)'
+                backgroundColor: state.isFocused ? "#e0e0e0" : "#fff",
+                borderRadius: "14px",
+                color: state.isFocused ? "black" : "rgba(18, 20, 23, 0.2)",
               }),
             }}
             isSearchable={false}
@@ -207,18 +213,18 @@ const SearchBar = ({
           <div className={styles.mileageInputs}>
             <input
               id="mileage-from"
-              type="number"
               value={mileageFrom}
               onChange={handleMileageFromChange}
               placeholder="From"
+              className={styles.inputMileageLeft}
             />
-            <span className={styles.mileageSeparator}>-</span>
+            <span className={styles.mileageSeparator}></span>
             <input
               id="mileage-to"
-              type="number"
               value={mileageTo}
               onChange={handleMileageToChange}
               placeholder="To"
+              className={styles.inputMileageRight}
             />
           </div>
         </div>

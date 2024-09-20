@@ -54,6 +54,41 @@
 .searchLabel {
   font: 500 14px / 1.28571 "Manrope", sans-serif;
   color: #8a8a89;
+  margin-bottom: 8px;
 }
 
+.mileageInputs {
+  display: flex;
+  align-items: center;
+  width: 320px;
+}
+
+.inputMileageLeft {
+  border: none !important;
+  border-radius: 14px 0 0 14px !important;
+  width: 160px !important;
+  height: 48px;
+  padding: 0 10px !important; 
+  font: 500 18px / 1.11111 "Manrope", sans-serif;
+  color: #121417 !important;
+  background: #f7f7fb;
+}
+
+.inputMileageRight {
+  border: none !important;
+  border-radius: 0 14px 14px 0 !important;
+  width: 160px !important;
+  height: 48px;
+  padding: 0 10px !important; 
+  font: 500 18px / 1.11111 "Manrope", sans-serif;
+  color: #121417 !important;
+  background: #f7f7fb;
+}
+
+.mileageSeparator {
+  border-left: 1px solid rgba(138, 138, 137, 0.2);
+  height: 48px;
+  margin: 0 ; 
+  background: #f7f7fb;
+}
 
