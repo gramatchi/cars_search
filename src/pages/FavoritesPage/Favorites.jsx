@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from 'axios';
 import CarItem from '../../components/CarItem/CarItem';
+import styles from './Favorites.module.css'
 
 
 const Favorites = () => {
@@ -31,7 +32,7 @@ const Favorites = () => {
   return (
     <div>
       <h1>Favorites</h1>
-      <div>
+      <div className={styles.carContainer}>
         {favorites.length > 0 ? (
           favorites.map(car => (
             <CarItem key={car.id} car={car} />

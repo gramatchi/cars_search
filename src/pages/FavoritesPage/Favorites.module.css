@@ -1,0 +1,8 @@
+.carContainer{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 29px;
+    margin-bottom: 50px;
+    margin-left: 128px;
+    margin-left: 129px;
+}

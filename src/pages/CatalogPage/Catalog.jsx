@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import CarItem from '../../components/CarItem/CarItem';
+import styles from './Catalog.module.css'
 
 const Catalog = () => {
   const [cars, setCars] = useState([]); 
@@ -18,7 +19,7 @@ const Catalog = () => {
   }, []);
 
   return (
-    <div>
+    <div  className={styles.carContainer}>
       {cars.length > 0 ? (
         cars.map((car) => <CarItem key={car.id} car={car} />)
       ) : (
