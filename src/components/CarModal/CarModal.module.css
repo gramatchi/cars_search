@@ -41,11 +41,11 @@
   margin-top: 14px;
 }
 
-.minititle{
-    font: 500 14px / 1.42857 "Manrope", sans-serif;
-color: #121417;
-margin-bottom: 8px;
-margin-top: 24px;
+.minititle {
+  font: 500 14px / 1.42857 "Manrope", sans-serif;
+  color: #121417;
+  margin-bottom: 8px;
+  margin-top: 24px;
 }
 
 .closeButton {
@@ -73,32 +73,46 @@ margin-top: 24px;
 }
 
 .rentalCarButton {
-  display: inline-block;
+  display: flex; /* Используем flex для выравнивания */
+  justify-content: center; /* Центровка по горизонтали */
+  align-items: center; /* Центровка по вертикали */
   background: #3470ff;
   border-radius: 12px;
-  padding: 12px 50px;
-  color: #fff;
   text-decoration: none;
-  text-align: center;
   font-size: 16px;
-  margin-top: 20px;
-  display: block;
+  width: 168px;
+  height: 44px;
+  font: 600 14px / 1.42857 "Manrope", sans-serif;
+  color: #fff;
+  cursor: pointer; /* Добавляем указатель курсора при наведении */
 }
 
 .rentalConditionsList {
-  list-style: none;
-  padding: 0;
+  display: flex;
+  flex-wrap: wrap; /* Элементы будут переноситься на следующую строку, если не помещаются */
+  gap: 8px;
+  margin-bottom: 24px;
 }
 
 .rentalConditionItem {
   background: #f9f9f9;
   border-radius: 35px;
   padding: 7px 14px;
-  width: 168px; /* Ширина для всех элементов списка */
-  height: 44px;
-  margin: 5px 0; /* Отступы между элементами списка */
-  display: flex;
+  height: 32px;
   align-items: center;
   justify-content: center;
   text-align: center;
+  font: 400 12px / 1.5 "Montserrat", sans-serif;
+  letter-spacing: -0.02em;
+  color: #363535;
+  white-space: nowrap;
+  display: block;
 }
+
+.conditionWithDigit {
+  font: 600 12px / 1.5 "Montserrat", sans-serif;
+  color: #3470ff;
+  letter-spacing: -0.02em;
+}
+
+
