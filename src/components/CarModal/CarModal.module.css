@@ -1,38 +1,104 @@
-
 .modalBackdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(18, 20, 23, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .modalContent {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    position: relative;
-    max-width: 500px;
-    width: 100%;
-  }
-  
-  .closeButton {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-  }
-  
-  .modalImage {
-    width: 100%;
-    height: auto;
-    margin-bottom: 10px;
-  }
-  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(18, 20, 23, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContent {
+  position: relative;
+  border-radius: 24px;
+  width: 541px;
+  background: #fff;
+  height: 752px;
+  padding: 40px; /* Паддинг для модалки */
+  overflow-y: auto;
+}
+
+.title {
+  font: 500 18px / 1.33333 "Manrope", sans-serif;
+  color: #121417;
+  margin-bottom: 8px;
+}
+.model {
+  font: 500 18px / 1.33 "Manrope", sans-serif;
+  color: #3470ff;
+}
+
+.additional {
+  font: 400 12px / 1.5 "Manrope", sans-serif;
+  color: rgba(18, 20, 23, 0.5);
+}
+
+.description {
+  font: 400 14px / 1.42857 "Manrope", sans-serif;
+  color: #121417;
+  margin-top: 14px;
+}
+
+.minititle{
+    font: 500 14px / 1.42857 "Manrope", sans-serif;
+color: #121417;
+margin-bottom: 8px;
+margin-top: 24px;
+}
+
+.closeButton {
+  position: absolute;
+  top: 16px; /* Отступ сверху */
+  right: 16px; /* Отступ справа */
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.closeIcon {
+  width: 24px; /* Ширина SVG */
+  height: 24px; /* Высота SVG */
+}
+
+.modalImage {
+  border-radius: 14px;
+  width: 461px;
+  height: 248px;
+  background: #f3f3f2;
+  object-fit: cover;
+  margin-bottom: 14px;
+}
+
+.rentalCarButton {
+  display: inline-block;
+  background: #3470ff;
+  border-radius: 12px;
+  padding: 12px 50px;
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  font-size: 16px;
+  margin-top: 20px;
+  display: block;
+}
+
+.rentalConditionsList {
+  list-style: none;
+  padding: 0;
+}
+
+.rentalConditionItem {
+  background: #f9f9f9;
+  border-radius: 35px;
+  padding: 7px 14px;
+  width: 168px; /* Ширина для всех элементов списка */
+  height: 44px;
+  margin: 5px 0; /* Отступы между элементами списка */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
