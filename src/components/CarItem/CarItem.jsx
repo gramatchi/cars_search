@@ -14,7 +14,7 @@ const CarItem = ({ car }) => {
 
   const getFirstThreeWords = (text) => {
     const words = text.split(" ");
-    return words.slice(0, 2).join(" "); // Получаем первые три слова и объединяем их обратно в строку
+    return words.slice(0, 2).join(" ");
   };
 
   useEffect(() => {

@@ -1,110 +1,124 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from "react";
+import axios from "axios";
+import styles from "./SearchBar.module.css"; // Импорт CSS модуля
 
-const SearchBar = ({ 
-  onSelectCarMake, 
-  onSelectPrice, 
-  onSearch, 
-  onReset, 
-  selectedMake, 
-  selectedPrice, 
-  maxPrice, 
+const SearchBar = ({
+  onSelectCarMake,
+  onSelectPrice,
+  onSearch,
+  onReset,
+  selectedMake,
+  selectedPrice,
+  maxPrice,
   onSelectMileageRange,
   mileageFrom,
-  mileageTo
+  mileageTo,
 }) => {
   const [carMakes, setCarMakes] = useState([]);
 
-  // Загрузка марок машин из API
   useEffect(() => {
     axios
-      .get('../../../makes.json') // Укажите реальный путь к вашему JSON файлу
+      .get("../../../makes.json")
       .then((response) => {
         setCarMakes(response.data);
       })
       .catch((error) => {
-        console.error('Error fetching the car makes:', error);
+        console.error("Error fetching the car makes:", error);
       });
   }, []);
 
-  // Генерируем шаги цены от 10 до максимальной цены с шагом 10
-  const priceOptions = Array.from({ length: Math.ceil(maxPrice / 10) }, (_, i) => (i + 1) * 10);
+  const priceOptions = Array.from(
+    { length: Math.ceil(maxPrice / 10) },
+    (_, i) => (i + 1) * 10
+  );
 
-  // Обработка изменения селекта для марки
   const handleSelectMakeChange = (event) => {
     const make = event.target.value;
-    onSelectCarMake(make); // Передаем выбранную марку в родительский компонент
+    onSelectCarMake(make);
   };
 
-  // Обработка изменения селекта для цены
   const handleSelectPriceChange = (event) => {
     const price = event.target.value;
-    onSelectPrice(price); // Передаем выбранную цену в родительский компонент
+    onSelectPrice(price);
   };
 
-  // Обработка изменения полей для пробега (mileage)
   const handleMileageFromChange = (event) => {
     const from = event.target.value;
-    onSelectMileageRange(from, mileageTo); // Передаем выбранный диапазон (от) в родительский компонент
+    onSelectMileageRange(from, mileageTo);
   };
 
   const handleMileageToChange = (event) => {
     const to = event.target.value;
-    onSelectMileageRange(mileageFrom, to); // Передаем выбранный диапазон (до) в родительский компонент
+    onSelectMileageRange(mileageFrom, to);
   };
 
   return (
-    <div>
-      {/* Фильтр по марке машины */}
-      <label htmlFor="car-make-select">Car brand</label>
-      <select id="car-make-select" value={selectedMake} onChange={handleSelectMakeChange}>
-        <option value="" disabled>
-          Enter the text
-        </option>
-        {carMakes.map((make, index) => (
-          <option key={index} value={make}>
-            {make}
-          </option>
-        ))}
-      </select>
+    <div className={styles.searchBarWrapper}>
+      <div className={styles.searchBarContainer}>
+        <div className={styles.searchField}>
+          <label htmlFor="car-make-select">Car brand</label>
+          <select
+            id="car-make-select"
+            value={selectedMake}
+            onChange={handleSelectMakeChange}
+          >
+            <option value="" disabled>
+              Enter the text
+            </option>
+            {carMakes.map((make, index) => (
+              <option key={index} value={make}>
+                {make}
+              </option>
+            ))}
+          </select>
+        </div>
 
-      {/* Фильтр по цене */}
-      <label htmlFor="price-select">Price / 1 hour</label>
-      <select id="price-select" value={selectedPrice} onChange={handleSelectPriceChange}>
-        <option value="" disabled>
-          To $
-        </option>
-        {priceOptions.map((price, index) => (
-          <option key={index} value={price}>
-            {price} {/* Убрали знак доллара */}
-          </option>
-        ))}
-      </select>
+        <div className={styles.searchField}>
+          <label htmlFor="price-select">Price / 1 hour</label>
+          <select
+            id="price-select"
+            value={selectedPrice}
+            onChange={handleSelectPriceChange}
+          >
+            <option value="" disabled>
+              To $
+            </option>
+            {priceOptions.map((price, index) => (
+              <option key={index} value={price}>
+                {price}
+              </option>
+            ))}
+          </select>
+        </div>
 
-      {/* Поля для диапазона пробега */}
-      <label htmlFor="mileage-from">Mileage from</label>
-      <input
-        id="mileage-from"
-        type="number"
-        value={mileageFrom}
-        onChange={handleMileageFromChange}
-        placeholder="From"
-      />
+        <div className={styles.searchField}>
+          <label htmlFor="mileage-range">Car mileage / km</label>
+          <div className={styles.mileageInputs}>
+            <input
+              id="mileage-from"
+              type="number"
+              value={mileageFrom}
+              onChange={handleMileageFromChange}
+              placeholder="From"
+            />
+            <span className={styles.mileageSeparator}>-</span>
+            <input
+              id="mileage-to"
+              type="number"
+              value={mileageTo}
+              onChange={handleMileageToChange}
+              placeholder="To"
+            />
+          </div>
+        </div>
 
-      <label htmlFor="mileage-to">Mileage to</label>
-      <input
-        id="mileage-to"
-        type="number"
-        value={mileageTo}
-        onChange={handleMileageToChange}
-        placeholder="To"
-      />
-
-      {/* Кнопка для поиска */}
-      <button onClick={onSearch}>Search</button>
-
-      {/* Кнопка для сброса */}
-      <button onClick={onReset}>Reset</button>
+        <button className={styles.searchButton} onClick={onSearch}>
+          Search
+        </button>
+        <button className={styles.resetButton} onClick={onReset}>
+          Reset
+        </button>
+      </div>
     </div>
   );
 };

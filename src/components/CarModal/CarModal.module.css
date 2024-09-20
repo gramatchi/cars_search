@@ -16,7 +16,7 @@
   width: 541px;
   background: #fff;
   height: 752px;
-  padding: 40px; /* Паддинг для модалки */
+  padding: 40px; 
   overflow-y: auto;
 }
 
@@ -50,8 +50,8 @@
 
 .closeButton {
   position: absolute;
-  top: 16px; /* Отступ сверху */
-  right: 16px; /* Отступ справа */
+  top: 16px; 
+  right: 16px; 
   border: none;
   background: transparent;
   cursor: pointer;
@@ -59,8 +59,8 @@
 }
 
 .closeIcon {
-  width: 24px; /* Ширина SVG */
-  height: 24px; /* Высота SVG */
+  width: 24px; 
+  height: 24px; 
 }
 
 .modalImage {
@@ -73,9 +73,9 @@
 }
 
 .rentalCarButton {
-  display: flex; /* Используем flex для выравнивания */
-  justify-content: center; /* Центровка по горизонтали */
-  align-items: center; /* Центровка по вертикали */
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
   background: #3470ff;
   border-radius: 12px;
   text-decoration: none;
@@ -84,12 +84,12 @@
   height: 44px;
   font: 600 14px / 1.42857 "Manrope", sans-serif;
   color: #fff;
-  cursor: pointer; /* Добавляем указатель курсора при наведении */
+  cursor: pointer; 
 }
 
 .rentalConditionsList {
   display: flex;
-  flex-wrap: wrap; /* Элементы будут переноситься на следующую строку, если не помещаются */
+  flex-wrap: wrap; 
   gap: 8px;
   margin-bottom: 24px;
 }

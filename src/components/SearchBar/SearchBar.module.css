@@ -1,0 +1,48 @@
+.searchBarWrapper {
+    display: flex;
+    justify-content: center;  /* Горизонтальное центрирование */
+    align-items: center;      /* Вертикальное центрирование */
+    padding: 50px 0;          /* Отступы сверху и снизу */
+  }
+  
+  .searchBarContainer {
+    display: flex;
+    align-items: flex-end; /* Выровнять поля по нижнему краю */
+    gap: 15px;             /* Промежутки между полями */
+  }
+  
+  .searchField {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .mileageInputs {
+    display: flex;
+    align-items: center;
+  }
+  
+  .mileageInputs input {
+    width: 60px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .mileageSeparator {
+    margin: 0 5px;
+  }
+  
+  .searchButton, .resetButton {
+    padding: 8px 16px;
+    background-color: #3470ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .searchButton:hover, .resetButton:hover {
+    background-color: #0b44cd;
+  }
+  

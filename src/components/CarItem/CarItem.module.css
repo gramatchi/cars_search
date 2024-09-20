@@ -1,7 +1,7 @@
 .carContainer {
   display: flex;
   flex-wrap: wrap;
-  gap: 29px; /* расстояние между карточками */
+  gap: 29px;
   justify-content: flex-start;
   width: 100%;
 
@@ -10,11 +10,11 @@
 .carCard {
   display: flex;
   flex-direction: column;
-  width: 274px; /* фиксированная ширина карточки */
+  width: 274px; 
   height: 426px;
   background-color: #fff;
   border-radius: 14px;
-  margin-bottom: 50px; /* расстояние между строками */
+  margin-bottom: 50px; 
 
 }
 
@@ -98,11 +98,11 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* полупрозрачный фон */
+  background-color: rgba(18, 20, 23, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000; /* высокий z-index для перекрытия всех элементов */
+  z-index: 1000; 
 }
 
 .modalContent {
