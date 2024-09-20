@@ -13,20 +13,42 @@ const Catalog = () => {
   const [mileageTo, setMileageTo] = useState("");
   const [maxPrice, setMaxPrice] = useState(0);
 
-  useEffect(() => {
+  const [page, setPage] = useState(1); 
+  const [isLoading, setIsLoading] = useState(false); 
+  const [hasMore, setHasMore] = useState(true); 
+
+  const fetchCars = (page = 1, isLoadMore = false) => {
+    setIsLoading(true);
     axios
-      .get("https://66ec85b02b6cf2b89c5eb0b3.mockapi.io/cars")
+      .get(`https://66ec85b02b6cf2b89c5eb0b3.mockapi.io/cars?page=${page}&limit=12`)
       .then((response) => {
-        setCars(response.data);
-        setFilteredCars(response.data); 
-        const prices = response.data.map((car) =>
-          parseFloat(car.rentalPrice.replace("$", ""))
-        );
-        setMaxPrice(Math.max(...prices));
+        if (response.data.length > 0) {
+          if (!isLoadMore) {
+            setCars(response.data);
+            setFilteredCars(response.data);
+          } else {
+            setCars((prevCars) => [...prevCars, ...response.data]);
+            setFilteredCars((prevCars) => [...prevCars, ...response.data]);
+          }
+
+          const prices = response.data.map((car) =>
+            parseFloat(car.rentalPrice.replace("$", ""))
+          );
+          setMaxPrice((prevMax) => Math.max(prevMax, ...prices));
+        } else {
+          setHasMore(false); 
+        }
       })
       .catch((error) => {
         console.error("Error fetching the cars:", error);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
+  };
+
+  useEffect(() => {
+    fetchCars(page); 
   }, []);
 
   const handleSearch = () => {
@@ -62,6 +84,12 @@ const Catalog = () => {
     setFilteredCars(cars);
   };
 
+  const handleLoadMore = () => {
+    const nextPage = page + 1;
+    setPage(nextPage); 
+    fetchCars(nextPage, true); 
+  };
+
   return (
     <div>
       <SearchBar
@@ -87,6 +115,12 @@ const Catalog = () => {
           <p>No cars found.</p>
         )}
       </div>
+
+      {hasMore && (
+        <button className={styles.loadMoreButton}  onClick={handleLoadMore} disabled={isLoading}>
+          {isLoading ? "Loading..." : "Load more"}
+        </button>
+      )}
     </div>
   );
 };

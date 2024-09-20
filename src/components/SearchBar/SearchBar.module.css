@@ -1,14 +1,14 @@
 .searchBarWrapper {
     display: flex;
-    justify-content: center;  /* Горизонтальное центрирование */
-    align-items: center;      /* Вертикальное центрирование */
-    padding: 50px 0;          /* Отступы сверху и снизу */
+    justify-content: center;  
+    align-items: center;      
+    padding: 50px 0;        
   }
   
   .searchBarContainer {
     display: flex;
-    align-items: flex-end; /* Выровнять поля по нижнему краю */
-    gap: 15px;             /* Промежутки между полями */
+    align-items: flex-end;
+    gap: 15px;
   }
   
   .searchField {
@@ -45,4 +45,11 @@
   .searchButton:hover, .resetButton:hover {
     background-color: #0b44cd;
   }
+  
+  .searchLabel {
+    font: 500 14px / 1.28571 "Manrope", sans-serif;
+    color: #8a8a89;
+  }
+  
+  
   
