@@ -71,10 +71,16 @@ const SearchBar = ({
   const isSearchDisabled =
     !selectedMake && !selectedPrice && !mileageFrom && !mileageTo;
 
+    
+
   const carMakeOptions = carMakes.map((make) => ({
     value: make,
     label: make,
   }));
+
+  if (!carMakeOptions.length) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className={styles.searchBarWrapper}>
