@@ -13,15 +13,17 @@ const Catalog = () => {
   const [mileageTo, setMileageTo] = useState("");
   const [maxPrice, setMaxPrice] = useState(0);
 
-  const [page, setPage] = useState(1); 
-  const [isLoading, setIsLoading] = useState(false); 
+  const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const [isSearching, setIsSearching] = useState(false); 
+  const [isSearching, setIsSearching] = useState(false);
 
   const fetchCars = (page = 1, isLoadMore = false) => {
     setIsLoading(true);
     axios
-      .get(`https://66ec85b02b6cf2b89c5eb0b3.mockapi.io/cars?page=${page}&limit=12`)
+      .get(
+        `https://66ec85b02b6cf2b89c5eb0b3.mockapi.io/cars?page=${page}&limit=12`
+      )
       .then((response) => {
         if (response.data.length > 0) {
           if (!isLoadMore) {
@@ -37,11 +39,8 @@ const Catalog = () => {
           );
           setMaxPrice((prevMax) => Math.max(prevMax, ...prices));
         } else {
-          setHasMore(false); 
+          setHasMore(false);
         }
-      })
-      .catch((error) => {
-        console.error("Error fetching the cars:", error);
       })
       .finally(() => {
         setIsLoading(false);
@@ -49,8 +48,8 @@ const Catalog = () => {
   };
 
   useEffect(() => {
-    fetchCars(page); 
-  }, []);
+    fetchCars(page);
+  }, [page]);
 
   const handleSearch = () => {
     let filtered = cars;
@@ -75,7 +74,7 @@ const Catalog = () => {
     }
 
     setFilteredCars(filtered);
-    setIsSearching(true); 
+    setIsSearching(true);
   };
 
   const handleReset = () => {
@@ -84,13 +83,13 @@ const Catalog = () => {
     setMileageFrom("");
     setMileageTo("");
     setFilteredCars(cars);
-    setIsSearching(false); 
+    setIsSearching(false);
   };
 
   const handleLoadMore = () => {
     const nextPage = page + 1;
-    setPage(nextPage); 
-    fetchCars(nextPage, true); 
+    setPage(nextPage);
+    fetchCars(nextPage, true);
   };
 
   return (
@@ -120,7 +119,11 @@ const Catalog = () => {
       </div>
 
       {hasMore && !isSearching && (
-        <button className={styles.loadMoreButton} onClick={handleLoadMore} disabled={isLoading}>
+        <button
+          className={styles.loadMoreButton}
+          onClick={handleLoadMore}
+          disabled={isLoading}
+        >
           {isLoading ? "Loading..." : "Load more"}
         </button>
       )}

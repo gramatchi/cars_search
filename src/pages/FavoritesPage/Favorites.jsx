@@ -12,11 +12,7 @@ const Favorites = () => {
       .get("https://66ec85b02b6cf2b89c5eb0b3.mockapi.io/cars")
       .then((response) => {
         setCars(response.data);
-        console.log(response.data);
       })
-      .catch((error) => {
-        console.error("Error fetching the cars:", error);
-      });
   }, []);
 
   useEffect(() => {

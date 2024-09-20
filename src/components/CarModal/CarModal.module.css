@@ -16,7 +16,7 @@
   width: 541px;
   background: #fff;
   height: 752px;
-  padding: 40px; 
+  padding: 40px;
   overflow-y: auto;
 }
 
@@ -50,8 +50,8 @@
 
 .closeButton {
   position: absolute;
-  top: 16px; 
-  right: 16px; 
+  top: 16px;
+  right: 16px;
   border: none;
   background: transparent;
   cursor: pointer;
@@ -59,8 +59,8 @@
 }
 
 .closeIcon {
-  width: 24px; 
-  height: 24px; 
+  width: 24px;
+  height: 24px;
 }
 
 .modalImage {
@@ -73,9 +73,9 @@
 }
 
 .rentalCarButton {
-  display: flex; 
-  justify-content: center; 
-  align-items: center; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: #3470ff;
   border-radius: 12px;
   text-decoration: none;
@@ -84,12 +84,12 @@
   height: 44px;
   font: 600 14px / 1.42857 "Manrope", sans-serif;
   color: #fff;
-  cursor: pointer; 
+  cursor: pointer;
 }
 
 .rentalConditionsList {
   display: flex;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 24px;
 }
@@ -114,5 +114,3 @@
   color: #3470ff;
   letter-spacing: -0.02em;
 }
-
-

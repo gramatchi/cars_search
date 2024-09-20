@@ -2,24 +2,23 @@
   display: flex;
   flex-wrap: wrap;
   gap: 29px;
-  margin: 0 128px; 
-  justify-content: center; 
+  margin: 0 128px;
+  justify-content: center;
   margin-bottom: 50px;
 }
 
-
 .loadMoreButton {
-  display: block; 
-  margin: 50px auto; 
-  padding: 10px 20px; 
-  font: 500 16px / 1.5 "Manrope", sans-serif; 
-  text-decoration: underline; 
-  text-decoration-skip-ink: none; 
+  display: block;
+  margin: 50px auto;
+  padding: 10px 20px;
+  font: 500 16px / 1.5 "Manrope", sans-serif;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
   color: #3470ff;
-  background: transparent; 
-  border: none; 
-  cursor: pointer; 
-  transition: color 0.3s ease; 
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
 }
 
 .loadMoreButton:hover,

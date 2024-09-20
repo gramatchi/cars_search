@@ -24,9 +24,6 @@ const SearchBar = ({
       .then((response) => {
         setCarMakes(response.data);
       })
-      .catch((error) => {
-        console.error("Error fetching the car makes:", error);
-      });
   }, []);
 
   const priceOptions = Array.from(
