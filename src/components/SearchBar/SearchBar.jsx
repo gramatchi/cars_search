@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import Select from "react-select";
-import styles from "./SearchBar.module.css";
+import styles from "./SearchBar.module.css"; 
 
 const SearchBar = ({
   onSelectCarMake,
@@ -16,18 +15,12 @@ const SearchBar = ({
   mileageTo,
 }) => {
   const [carMakes, setCarMakes] = useState([]);
-  const [selectedMakeOption, setSelectedMakeOption] = useState(null);
-  const [selectedPriceOption, setSelectedPriceOption] = useState(null);
 
   useEffect(() => {
     axios
       .get("../../../makes.json")
       .then((response) => {
-        const makeOptions = response.data.map((make) => ({
-          value: make,
-          label: make,
-        }));
-        setCarMakes(makeOptions);
+        setCarMakes(response.data);
       })
       .catch((error) => {
         console.error("Error fetching the car makes:", error);
@@ -36,17 +29,17 @@ const SearchBar = ({
 
   const priceOptions = Array.from(
     { length: Math.ceil(maxPrice / 10) },
-    (_, i) => ({ value: (i + 1) * 10, label: `$${(i + 1) * 10}` })
+    (_, i) => (i + 1) * 10
   );
 
-  const handleSelectMakeChange = (selectedOption) => {
-    setSelectedMakeOption(selectedOption);
-    onSelectCarMake(selectedOption ? selectedOption.value : "");
+  const handleSelectMakeChange = (event) => {
+    const make = event.target.value;
+    onSelectCarMake(make);
   };
 
-  const handleSelectPriceChange = (selectedOption) => {
-    setSelectedPriceOption(selectedOption);
-    onSelectPrice(selectedOption ? selectedOption.value : "");
+  const handleSelectPriceChange = (event) => {
+    const price = event.target.value;
+    onSelectPrice(price);
   };
 
   const handleMileageFromChange = (event) => {
@@ -59,53 +52,74 @@ const SearchBar = ({
     onSelectMileageRange(mileageFrom, to);
   };
 
+  const isSearchDisabled = !selectedMake && !selectedPrice && !mileageFrom && !mileageTo;
+
   return (
     <div className={styles.searchBarWrapper}>
       <div className={styles.searchBarContainer}>
         <div className={styles.searchField}>
-          <label className={styles.searchLabel}>Car brand</label>
-          <Select
-            classNamePrefix="custom-select"
-            options={carMakes}
+          <label className={styles.searchLabel} htmlFor="car-make-select">Car brand</label>
+          <select
+            className={styles.selectMake}
+            id="car-make-select"
+            value={selectedMake}
             onChange={handleSelectMakeChange}
-            value={selectedMakeOption}
-            placeholder="Enter the text"
-          />
+          >
+            <option className={styles.optionMake} value="" disabled>
+              Enter the text
+            </option>
+            {carMakes.map((make, index) => (
+              <option key={index} value={make}>
+                {make}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div className={styles.searchField}>
-          <label className={styles.searchLabel}>Price / 1 hour</label>
-          <Select
-            classNamePrefix="custom-select"
-            options={priceOptions}
+          <label className={styles.searchLabel} htmlFor="price-select">Price / 1 hour</label>
+          <select
+            id="price-select"
+            value={selectedPrice}
             onChange={handleSelectPriceChange}
-            value={selectedPriceOption}
-            placeholder="To $"
-          />
+          >
+            <option value="" disabled>
+              To $
+            </option>
+            {priceOptions.map((price, index) => (
+              <option key={index} value={price}>
+                {price}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div className={styles.searchField}>
-          <label className={styles.searchLabel}>Car mileage / km</label>
+          <label className={styles.searchLabel} htmlFor="mileage-range">Car mileage / km</label>
           <div className={styles.mileageInputs}>
             <input
+              id="mileage-from"
               type="number"
               value={mileageFrom}
               onChange={handleMileageFromChange}
               placeholder="From"
-              className={styles.mileageInput}
             />
             <span className={styles.mileageSeparator}>-</span>
             <input
+              id="mileage-to"
               type="number"
               value={mileageTo}
               onChange={handleMileageToChange}
               placeholder="To"
-              className={styles.mileageInput}
             />
           </div>
         </div>
 
-        <button className={styles.searchButton} onClick={onSearch}>
+        <button 
+          className={styles.searchButton} 
+          onClick={onSearch} 
+          disabled={isSearchDisabled} // Делаем кнопку неактивной при отсутствии параметров
+        >
           Search
         </button>
         <button className={styles.resetButton} onClick={onReset}>

@@ -15,7 +15,8 @@ const Catalog = () => {
 
   const [page, setPage] = useState(1); 
   const [isLoading, setIsLoading] = useState(false); 
-  const [hasMore, setHasMore] = useState(true); 
+  const [hasMore, setHasMore] = useState(true);
+  const [isSearching, setIsSearching] = useState(false); // Новое состояние
 
   const fetchCars = (page = 1, isLoadMore = false) => {
     setIsLoading(true);
@@ -74,6 +75,7 @@ const Catalog = () => {
     }
 
     setFilteredCars(filtered);
+    setIsSearching(true); // Устанавливаем состояние поиска
   };
 
   const handleReset = () => {
@@ -82,6 +84,7 @@ const Catalog = () => {
     setMileageFrom("");
     setMileageTo("");
     setFilteredCars(cars);
+    setIsSearching(false); // Сбрасываем состояние поиска
   };
 
   const handleLoadMore = () => {
@@ -116,8 +119,8 @@ const Catalog = () => {
         )}
       </div>
 
-      {hasMore && (
-        <button className={styles.loadMoreButton}  onClick={handleLoadMore} disabled={isLoading}>
+      {hasMore && !isSearching && (
+        <button className={styles.loadMoreButton} onClick={handleLoadMore} disabled={isLoading}>
           {isLoading ? "Loading..." : "Load more"}
         </button>
       )}
