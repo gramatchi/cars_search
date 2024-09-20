@@ -19,7 +19,7 @@ const CarItem = ({ car }) => {
 
   useEffect(() => {
     localStorage.setItem(storageKey, isFavorite);
-  }, [isFavorite]);
+  }, [isFavorite, storageKey]);
 
   useEffect(() => {
     const handleKeyDown = (event) => {

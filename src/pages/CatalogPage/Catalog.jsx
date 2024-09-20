@@ -16,7 +16,7 @@ const Catalog = () => {
   const [page, setPage] = useState(1); 
   const [isLoading, setIsLoading] = useState(false); 
   const [hasMore, setHasMore] = useState(true);
-  const [isSearching, setIsSearching] = useState(false); // Новое состояние
+  const [isSearching, setIsSearching] = useState(false); 
 
   const fetchCars = (page = 1, isLoadMore = false) => {
     setIsLoading(true);
@@ -75,7 +75,7 @@ const Catalog = () => {
     }
 
     setFilteredCars(filtered);
-    setIsSearching(true); // Устанавливаем состояние поиска
+    setIsSearching(true); 
   };
 
   const handleReset = () => {
@@ -84,7 +84,7 @@ const Catalog = () => {
     setMileageFrom("");
     setMileageTo("");
     setFilteredCars(cars);
-    setIsSearching(false); // Сбрасываем состояние поиска
+    setIsSearching(false); 
   };
 
   const handleLoadMore = () => {

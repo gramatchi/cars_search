@@ -1,55 +1,59 @@
 .searchBarWrapper {
-    display: flex;
-    justify-content: center;  
-    align-items: center;      
-    padding: 50px 0;        
-  }
-  
-  .searchBarContainer {
-    display: flex;
-    align-items: flex-end;
-    gap: 15px;
-  }
-  
-  .searchField {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .mileageInputs {
-    display: flex;
-    align-items: center;
-  }
-  
-  .mileageInputs input {
-    width: 60px;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .mileageSeparator {
-    margin: 0 5px;
-  }
-  
-  .searchButton, .resetButton {
-    padding: 8px 16px;
-    background-color: #3470ff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .searchButton:hover, .resetButton:hover {
-    background-color: #0b44cd;
-  }
-  
-  .searchLabel {
-    font: 500 14px / 1.28571 "Manrope", sans-serif;
-    color: #8a8a89;
-  }
-  
-  
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 0;
+}
+
+.searchBarContainer {
+  display: flex;
+  align-items: flex-end;
+  gap: 15px;
+}
+
+.searchField {
+  display: flex;
+  flex-direction: column;
+}
+
+.mileageInputs {
+  display: flex;
+  align-items: center;
+}
+
+.mileageInputs input {
+  width: 60px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.mileageSeparator {
+  margin: 0 5px;
+}
+
+.searchButton,
+.resetButton {
+  border-radius: 12px;
+  padding: 14px 44px;
+  width: 136px;
+  height: 48px;
+  background: #3470ff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font: 600 14px / 1.42857 "Manrope", sans-serif;
+  color: #fff;
+  border: none;
+}
+
+.searchButton:hover,
+.resetButton:hover {
+  background: #0b44cd;
+}
+
+.searchLabel {
+  font: 500 14px / 1.28571 "Manrope", sans-serif;
+  color: #8a8a89;
+}
+
+
