@@ -73,10 +73,10 @@ const SearchBar = ({
 
     
 
-  const carMakeOptions = carMakes.map((make) => ({
-    value: make,
-    label: make,
-  }));
+    const carMakeOptions = Array.isArray(carMakes) ? carMakes.map((make) => ({
+      value: make,
+      label: make,
+    })) : [];
 
   if (!carMakeOptions.length) {
     return <div>Loading...</div>;
