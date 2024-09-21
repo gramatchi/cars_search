@@ -24,7 +24,12 @@ const SearchBar = ({
       try {
         const response = await axios.get("../../../makes.json");
         // Проверяем, что данные - массив, если нет, устанавливаем пустой массив
-        setCarMakes(Array.isArray(response.data) ? response.data : []);
+        if (Array.isArray(response.data)) {
+          setCarMakes(response.data);
+        } else {
+          console.error("Полученные данные не являются массивом:", response.data);
+          setCarMakes([]); // Устанавливаем пустой массив, если данные некорректны
+        }
       } catch (error) {
         console.error("Ошибка при загрузке данных:", error);
       } finally {
@@ -80,6 +85,7 @@ const SearchBar = ({
   const isSearchDisabled =
     !selectedMake && !selectedPrice && !mileageFrom && !mileageTo;
 
+  // Формируем опции для Select
   const carMakeOptions = carMakes.map((make) => ({
     value: make,
     label: make,
@@ -88,7 +94,6 @@ const SearchBar = ({
   return (
     <div className={styles.searchBarWrapper}>
       <div className={styles.searchBarContainer}>
-        {/* Компонент поиска всегда отображается */}
         <div className={styles.searchField}>
           <label className={styles.searchLabel} htmlFor="car-make-select">
             Car brand
@@ -150,6 +155,7 @@ const SearchBar = ({
           />
         </div>
 
+        {/* Остальные поля для поиска и кнопки остаются без изменений */}
         <div className={styles.searchField}>
           <label className={styles.searchLabel} htmlFor="price-select">
             Price / 1 hour
