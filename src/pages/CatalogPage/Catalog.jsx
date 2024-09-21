@@ -21,22 +21,16 @@ const Catalog = () => {
   const fetchCars = (page = 1, isLoadMore = false) => {
     setIsLoading(true);
     axios
-      .get(
-        `https://66ec85b02b6cf2b89c5eb0b3.mockapi.io/cars?page=${page}&limit=12`
-      )
+      .get(`https://66ec85b02b6cf2b89c5eb0b3.mockapi.io/cars?page=${page}&limit=12`)
       .then((response) => {
         if (response.data.length > 0) {
-          if (!isLoadMore) {
-            setCars(response.data);
-            setFilteredCars(response.data);
-          } else {
-            setCars((prevCars) => [...prevCars, ...response.data]);
-            setFilteredCars((prevCars) => [...prevCars, ...response.data]);
-          }
-
-          const prices = response.data.map((car) =>
-            parseFloat(car.rentalPrice.replace("$", ""))
-          );
+          setCars((prevCars) => {
+            const newCars = isLoadMore ? [...prevCars, ...response.data] : response.data;
+            setFilteredCars(newCars); 
+            return newCars;
+          });
+  
+          const prices = response.data.map((car) => parseFloat(car.rentalPrice.replace("$", "")));
           setMaxPrice((prevMax) => Math.max(prevMax, ...prices));
         } else {
           setHasMore(false);

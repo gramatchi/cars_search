@@ -24,13 +24,11 @@ const SearchBar = ({
         const response = await axios.get("/makes.json");
         if (Array.isArray(response.data)) {
           setCarMakes(response.data);
-          console.log("Loaded car makes:", response.data);
-          console.log("Loaded car makes:", response.data); // для отладки
         } else {
-          console.error("Data is not an array:", response.data);
+          console.error(response.data);
         }
       } catch (error) {
-        console.error("Error fetching car makes:", error);
+        console.error(error);
       }
     };
 
