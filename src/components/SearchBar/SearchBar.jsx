@@ -12,7 +12,7 @@ const SearchBar = ({
   onSelectMileageRange,
 }) => {
   const [carMakes, setCarMakes] = useState([]);
-  const [loading, setLoading] = useState(true); // Состояние загрузки
+  const [loading, setLoading] = useState(true);
 
   const [selectedMake, setSelectedMake] = useState(null);
   const [selectedPrice, setSelectedPrice] = useState(null);
@@ -23,15 +23,12 @@ const SearchBar = ({
     const fetchCarMakes = async () => {
       try {
         const response = await axios.get("../../../makes.json");
-        if (Array.isArray(response.data)) {
-          setCarMakes(response.data);
-        } else {
-          console.error("Полученные данные не являются массивом:", response.data);
-        }
+        // Проверяем, что данные - массив, если нет, устанавливаем пустой массив
+        setCarMakes(Array.isArray(response.data) ? response.data : []);
       } catch (error) {
         console.error("Ошибка при загрузке данных:", error);
       } finally {
-        setLoading(false); // Устанавливаем состояние загрузки в false
+        setLoading(false);
       }
     };
 
@@ -91,167 +88,162 @@ const SearchBar = ({
   return (
     <div className={styles.searchBarWrapper}>
       <div className={styles.searchBarContainer}>
-        {loading ? ( // Показываем индикатор загрузки
-          <p>Loading...</p>
-        ) : (
-          <>
-            <div className={styles.searchField}>
-              <label className={styles.searchLabel} htmlFor="car-make-select">
-                Car brand
-              </label>
-              <Select
-                id="car-make-select"
-                value={
-                  carMakeOptions.find((option) => option.value === selectedMake) ||
-                  null
-                }
-                onChange={handleSelectMakeChange}
-                options={carMakeOptions}
-                placeholder="Enter the text"
-                className={styles.selectFieldMake}
-                styles={{
-                  control: (provided) => ({
-                    ...provided,
-                    borderRadius: "14px",
-                    width: "224px",
-                    height: "48px",
-                    border: "1px solid #ccc",
-                    boxShadow: "none",
-                    alignItems: "center",
-                    display: "flex",
-                    font: '500 18px / 1.11111 "Manrope", sans-serif',
-                    color: "#121417",
-                    background: "#f7f7fb",
-                  }),
-                  singleValue: (provided) => ({
-                    ...provided,
-                    color: "#121417",
-                    width: "100%",
-                  }),
-                  placeholder: (provided) => ({
-                    ...provided,
-                    color: "#121417",
-                    display: "flex",
-                    background: "#f7f7fb",
-                  }),
-                  indicatorSeparator: () => ({
-                    display: "none",
-                  }),
-                  menu: (provided) => ({
-                    ...provided,
-                    borderRadius: "14px",
-                    border: "1px solid rgba(18, 20, 23, 0.05)",
-                    background: "#fff",
-                    boxShadow: "0 4px 36px 0 rgba(0, 0, 0, 0.02)",
-                    color: "rgba(18, 20, 23, 0.2)",
-                  }),
-                  option: (provided, state) => ({
-                    ...provided,
-                    backgroundColor: state.isFocused ? "#e0e0e0" : "#fff",
-                    borderRadius: "14px",
-                    color: state.isFocused ? "black" : "rgba(18, 20, 23, 0.2)",
-                  }),
-                }}
-                isSearchable={false}
-              />
-            </div>
+        {/* Компонент поиска всегда отображается */}
+        <div className={styles.searchField}>
+          <label className={styles.searchLabel} htmlFor="car-make-select">
+            Car brand
+          </label>
+          <Select
+            id="car-make-select"
+            value={
+              carMakeOptions.find((option) => option.value === selectedMake) ||
+              null
+            }
+            onChange={handleSelectMakeChange}
+            options={carMakeOptions}
+            placeholder="Enter the text"
+            className={styles.selectFieldMake}
+            styles={{
+              control: (provided) => ({
+                ...provided,
+                borderRadius: "14px",
+                width: "224px",
+                height: "48px",
+                border: "1px solid #ccc",
+                boxShadow: "none",
+                alignItems: "center",
+                display: "flex",
+                font: '500 18px / 1.11111 "Manrope", sans-serif',
+                color: "#121417",
+                background: "#f7f7fb",
+              }),
+              singleValue: (provided) => ({
+                ...provided,
+                color: "#121417",
+                width: "100%",
+              }),
+              placeholder: (provided) => ({
+                ...provided,
+                color: "#121417",
+                display: "flex",
+                background: "#f7f7fb",
+              }),
+              indicatorSeparator: () => ({
+                display: "none",
+              }),
+              menu: (provided) => ({
+                ...provided,
+                borderRadius: "14px",
+                border: "1px solid rgba(18, 20, 23, 0.05)",
+                background: "#fff",
+                boxShadow: "0 4px 36px 0 rgba(0, 0, 0, 0.02)",
+                color: "rgba(18, 20, 23, 0.2)",
+              }),
+              option: (provided, state) => ({
+                ...provided,
+                backgroundColor: state.isFocused ? "#e0e0e0" : "#fff",
+                borderRadius: "14px",
+                color: state.isFocused ? "black" : "rgba(18, 20, 23, 0.2)",
+              }),
+            }}
+            isSearchable={false}
+          />
+        </div>
 
-            <div className={styles.searchField}>
-              <label className={styles.searchLabel} htmlFor="price-select">
-                Price / 1 hour
-              </label>
-              <Select
-                id="price-select"
-                value={
-                  priceOptions.find((option) => option.value === selectedPrice) ||
-                  null
-                }
-                onChange={handleSelectPriceChange}
-                options={priceOptions}
-                placeholder="To $"
-                className={styles.selectFieldPrice}
-                styles={{
-                  control: (provided) => ({
-                    ...provided,
-                    borderRadius: "14px",
-                    width: "125px",
-                    height: "48px",
-                    border: "1px solid #ccc",
-                    boxShadow: "none",
-                    alignItems: "center",
-                    display: "flex",
-                    font: '500 18px / 1.11111 "Manrope", sans-serif',
-                    color: "#121417",
-                    background: "#f7f7fb",
-                  }),
-                  singleValue: (provided) => ({
-                    ...provided,
-                    color: "#121417",
-                    width: "100%",
-                  }),
-                  placeholder: (provided) => ({
-                    ...provided,
-                    color: "#121417",
-                    display: "flex",
-                    background: "#f7f7fb",
-                  }),
-                  indicatorSeparator: () => ({
-                    display: "none",
-                  }),
-                  menu: (provided) => ({
-                    ...provided,
-                    borderRadius: "14px",
-                    border: "1px solid rgba(18, 20, 23, 0.05)",
-                    background: "#fff",
-                    boxShadow: "0 4px 36px 0 rgba(0, 0, 0, 0.02)",
-                    color: "rgba(18, 20, 23, 0.2)",
-                  }),
-                  option: (provided, state) => ({
-                    ...provided,
-                    backgroundColor: state.isFocused ? "#e0e0e0" : "#fff",
-                    borderRadius: "14px",
-                    color: state.isFocused ? "black" : "rgba(18, 20, 23, 0.2)",
-                  }),
-                }}
-                isSearchable={false}
-              />
-            </div>
+        <div className={styles.searchField}>
+          <label className={styles.searchLabel} htmlFor="price-select">
+            Price / 1 hour
+          </label>
+          <Select
+            id="price-select"
+            value={
+              priceOptions.find((option) => option.value === selectedPrice) ||
+              null
+            }
+            onChange={handleSelectPriceChange}
+            options={priceOptions}
+            placeholder="To $"
+            className={styles.selectFieldPrice}
+            styles={{
+              control: (provided) => ({
+                ...provided,
+                borderRadius: "14px",
+                width: "125px",
+                height: "48px",
+                border: "1px solid #ccc",
+                boxShadow: "none",
+                alignItems: "center",
+                display: "flex",
+                font: '500 18px / 1.11111 "Manrope", sans-serif',
+                color: "#121417",
+                background: "#f7f7fb",
+              }),
+              singleValue: (provided) => ({
+                ...provided,
+                color: "#121417",
+                width: "100%",
+              }),
+              placeholder: (provided) => ({
+                ...provided,
+                color: "#121417",
+                display: "flex",
+                background: "#f7f7fb",
+              }),
+              indicatorSeparator: () => ({
+                display: "none",
+              }),
+              menu: (provided) => ({
+                ...provided,
+                borderRadius: "14px",
+                border: "1px solid rgba(18, 20, 23, 0.05)",
+                background: "#fff",
+                boxShadow: "0 4px 36px 0 rgba(0, 0, 0, 0.02)",
+                color: "rgba(18, 20, 23, 0.2)",
+              }),
+              option: (provided, state) => ({
+                ...provided,
+                backgroundColor: state.isFocused ? "#e0e0e0" : "#fff",
+                borderRadius: "14px",
+                color: state.isFocused ? "black" : "rgba(18, 20, 23, 0.2)",
+              }),
+            }}
+            isSearchable={false}
+          />
+        </div>
 
-            <div className={styles.searchField}>
-              <label className={styles.searchLabel} htmlFor="mileage-range">
-                Car mileage / km
-              </label>
-              <div className={styles.mileageInputs}>
-                <input
-                  id="mileage-from"
-                  value={mileageFrom}
-                  onChange={handleMileageFromChange}
-                  placeholder="From"
-                  className={styles.inputMileageLeft}
-                />
-                <span className={styles.mileageSeparator}></span>
-                <input
-                  id="mileage-to"
-                  value={mileageTo}
-                  onChange={handleMileageToChange}
-                  placeholder="To"
-                  className={styles.inputMileageRight}
-                />
-              </div>
-            </div>
+        <div className={styles.searchField}>
+          <label className={styles.searchLabel} htmlFor="mileage-range">
+            Car mileage / km
+          </label>
+          <div className={styles.mileageInputs}>
+            <input
+              id="mileage-from"
+              value={mileageFrom}
+              onChange={handleMileageFromChange}
+              placeholder="From"
+              className={styles.inputMileageLeft}
+            />
+            <span className={styles.mileageSeparator}></span>
+            <input
+              id="mileage-to"
+              value={mileageTo}
+              onChange={handleMileageToChange}
+              placeholder="To"
+              className={styles.inputMileageRight}
+            />
+          </div>
+        </div>
 
-            <button
-              className={styles.searchButton}
-              onClick={onSearch}
-              disabled={isSearchDisabled}
-            >
-              Search
-            </button>
-            <button className={styles.resetButton} onClick={handleReset}>
-              Reset
-            </button>
-          </>
-        )}
+        <button
+          className={styles.searchButton}
+          onClick={onSearch}
+          disabled={isSearchDisabled}
+        >
+          Search
+        </button>
+        <button className={styles.resetButton} onClick={handleReset}>
+          Reset
+        </button>
       </div>
     </div>
   );
