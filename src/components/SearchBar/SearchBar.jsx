@@ -22,14 +22,15 @@ const SearchBar = ({
     const fetchCarMakes = async () => {
       try {
         const response = await axios.get("../../../makes.json");
-
         if (Array.isArray(response.data)) {
           setCarMakes(response.data);
+          console.log("Loaded car makes:", response.data);
+          console.log("Loaded car makes:", response.data); // для отладки
         } else {
-          // console.error(response.data);
+          console.error("Data is not an array:", response.data);
         }
       } catch (error) {
-        console.error(error);
+        console.error("Error fetching car makes:", error);
       }
     };
 
@@ -81,10 +82,10 @@ const SearchBar = ({
   const isSearchDisabled =
     !selectedMake && !selectedPrice && !mileageFrom && !mileageTo;
 
-  const carMakeOptions = carMakes.map((make) => ({
-    value: make,
-    label: make,
-  }));
+    const carMakeOptions = carMakes.map(make => ({
+      value: make.value,
+      label: make.label,
+    }));
 
   return (
     <div className={styles.searchBarWrapper}>
@@ -96,8 +97,7 @@ const SearchBar = ({
           <Select
             id="car-make-select"
             value={
-              carMakeOptions.find((option) => option.value === selectedMake) ||
-              null
+              carMakes.find((option) => option.value === selectedMake) || null
             }
             onChange={handleSelectMakeChange}
             options={carMakeOptions}
