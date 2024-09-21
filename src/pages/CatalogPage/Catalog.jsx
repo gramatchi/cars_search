@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import CarItem from "../../components/CarItem/CarItem";
 import SearchBar from "../../components/SearchBar/SearchBar";
@@ -12,24 +12,20 @@ const Catalog = () => {
   const [mileageFrom, setMileageFrom] = useState("");
   const [mileageTo, setMileageTo] = useState("");
   const [maxPrice, setMaxPrice] = useState(0);
-
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [isSearching, setIsSearching] = useState(false);
 
-  const fetchCars = (page = 1, isLoadMore = false) => {
+  const fetchCars = useCallback((pageNum = 1, isLoadMore = false) => {
     setIsLoading(true);
     axios
-      .get(`https://66ec85b02b6cf2b89c5eb0b3.mockapi.io/cars?page=${page}&limit=12`)
+      .get(`https://66ec85b02b6cf2b89c5eb0b3.mockapi.io/cars?page=${pageNum}&limit=12`)
       .then((response) => {
         if (response.data.length > 0) {
-          setCars((prevCars) => {
-            const newCars = isLoadMore ? [...prevCars, ...response.data] : response.data;
-            setFilteredCars(newCars); 
-            return newCars;
-          });
-  
+          setCars((prevCars) => isLoadMore ? [...prevCars, ...response.data] : response.data);
+          setFilteredCars((prevFiltered) => isLoadMore ? [...prevFiltered, ...response.data] : response.data);
+          
           const prices = response.data.map((car) => parseFloat(car.rentalPrice.replace("$", "")));
           setMaxPrice((prevMax) => Math.max(prevMax, ...prices));
         } else {
@@ -39,13 +35,13 @@ const Catalog = () => {
       .finally(() => {
         setIsLoading(false);
       });
-  };
+  }, []);
 
   useEffect(() => {
     fetchCars(page);
-  }, [page]);
+  }, [fetchCars, page]);
 
-  const handleSearch = () => {
+  const handleSearch = useCallback(() => {
     let filtered = cars;
 
     if (selectedMake) {
@@ -69,7 +65,7 @@ const Catalog = () => {
 
     setFilteredCars(filtered);
     setIsSearching(true);
-  };
+  }, [cars, selectedMake, selectedPrice, mileageFrom, mileageTo]);
 
   const handleReset = () => {
     setSelectedMake("");
@@ -81,10 +77,14 @@ const Catalog = () => {
   };
 
   const handleLoadMore = () => {
-    const nextPage = page + 1;
-    setPage(nextPage);
-    fetchCars(nextPage, true);
+    setPage((prevPage) => prevPage + 1);
   };
+
+  useEffect(() => {
+    if (page > 1) {
+      fetchCars(page, true);
+    }
+  }, [fetchCars, page]);
 
   return (
     <div>

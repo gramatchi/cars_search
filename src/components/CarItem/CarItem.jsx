@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import styles from "./CarItem.module.css";
-// import heart from "../../images/heart.svg";
 import CarModal from "../CarModal/CarModal";
 
 const CarItem = ({ car }) => {
