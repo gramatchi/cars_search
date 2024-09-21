@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import styles from "./CarItem.module.css";
-import heart from "../../images/heart.svg";
+// import heart from "../../images/heart.svg";
 import CarModal from "../CarModal/CarModal";
 
 const CarItem = ({ car }) => {
@@ -74,7 +74,7 @@ const CarItem = ({ car }) => {
           height="18"
           onClick={handleHeartClick}
         >
-          <use href={`${heart}#heart`} />
+          <use href={`/heart.svg#heart`} />
         </svg>
       </div>
       <div className={styles.carInfo}>
