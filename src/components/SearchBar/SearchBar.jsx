@@ -73,15 +73,11 @@ const SearchBar = ({
 
     
 
-    const carMakeOptions = Array.isArray(carMakes) ? carMakes.map((make) => ({
-      value: make,
-      label: make,
-    })) : [];
-
-  if (!carMakeOptions.length) {
-    return <div>Loading...</div>;
-  }
-
+  const carMakeOptions = carMakes.map((make) => ({
+    value: make,
+    label: make,
+  }));
+  
   return (
     <div className={styles.searchBarWrapper}>
       <div className={styles.searchBarContainer}>
