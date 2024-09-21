@@ -22,14 +22,14 @@ const SearchBar = ({
     const fetchCarMakes = async () => {
       try {
         const response = await axios.get("../../../makes.json");
-        // Проверяем, что response.data - это массив
+
         if (Array.isArray(response.data)) {
           setCarMakes(response.data);
         } else {
-          console.error("Полученные данные не являются массивом:", response.data);
+          // console.error(response.data);
         }
       } catch (error) {
-        console.error("Ошибка при загрузке данных:", error);
+        console.error(error);
       }
     };
 
