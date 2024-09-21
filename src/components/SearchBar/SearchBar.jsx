@@ -21,7 +21,7 @@ const SearchBar = ({
   useEffect(() => {
     const fetchCarMakes = async () => {
       try {
-        const response = await axios.get("../../../public/makes.json");
+        const response = await axios.get("/makes.json");
         if (Array.isArray(response.data)) {
           setCarMakes(response.data);
           console.log("Loaded car makes:", response.data);
