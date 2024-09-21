@@ -19,11 +19,21 @@ const SearchBar = ({
   const [mileageTo, setMileageTo] = useState("");
 
   useEffect(() => {
-    axios
-      .get("../../../makes.json")
-      .then((response) => {
-        setCarMakes(response.data);
-      })
+    const fetchCarMakes = async () => {
+      try {
+        const response = await axios.get("../../../makes.json");
+        // Проверяем, что response.data - это массив
+        if (Array.isArray(response.data)) {
+          setCarMakes(response.data);
+        } else {
+          console.error("Полученные данные не являются массивом:", response.data);
+        }
+      } catch (error) {
+        console.error("Ошибка при загрузке данных:", error);
+      }
+    };
+
+    fetchCarMakes();
   }, []);
 
   const priceOptions = Array.from(
@@ -71,13 +81,11 @@ const SearchBar = ({
   const isSearchDisabled =
     !selectedMake && !selectedPrice && !mileageFrom && !mileageTo;
 
-    
-
   const carMakeOptions = carMakes.map((make) => ({
     value: make,
     label: make,
   }));
-  
+
   return (
     <div className={styles.searchBarWrapper}>
       <div className={styles.searchBarContainer}>
@@ -120,7 +128,6 @@ const SearchBar = ({
                 display: "flex",
                 background: "#f7f7fb",
               }),
-
               indicatorSeparator: () => ({
                 display: "none",
               }),
@@ -182,7 +189,6 @@ const SearchBar = ({
                 display: "flex",
                 background: "#f7f7fb",
               }),
-
               indicatorSeparator: () => ({
                 display: "none",
               }),
