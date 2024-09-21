@@ -12,7 +12,6 @@ const SearchBar = ({
   onSelectMileageRange,
 }) => {
   const [carMakes, setCarMakes] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   const [selectedMake, setSelectedMake] = useState(null);
   const [selectedPrice, setSelectedPrice] = useState(null);
@@ -23,17 +22,14 @@ const SearchBar = ({
     const fetchCarMakes = async () => {
       try {
         const response = await axios.get("../../../makes.json");
-        // Проверяем, что данные - массив, если нет, устанавливаем пустой массив
+
         if (Array.isArray(response.data)) {
           setCarMakes(response.data);
         } else {
-          console.error("Полученные данные не являются массивом:", response.data);
-          setCarMakes([]); // Устанавливаем пустой массив, если данные некорректны
+          // console.error(response.data);
         }
       } catch (error) {
-        console.error("Ошибка при загрузке данных:", error);
-      } finally {
-        setLoading(false);
+        console.error(error);
       }
     };
 
@@ -85,7 +81,6 @@ const SearchBar = ({
   const isSearchDisabled =
     !selectedMake && !selectedPrice && !mileageFrom && !mileageTo;
 
-  // Формируем опции для Select
   const carMakeOptions = carMakes.map((make) => ({
     value: make,
     label: make,
@@ -155,7 +150,6 @@ const SearchBar = ({
           />
         </div>
 
-        {/* Остальные поля для поиска и кнопки остаются без изменений */}
         <div className={styles.searchField}>
           <label className={styles.searchLabel} htmlFor="price-select">
             Price / 1 hour
